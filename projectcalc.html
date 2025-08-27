@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="bruh.css">
+    <title>Colorful Calculator by Anvay</title>
+    <style>
+        body {
+            
+            background-color: #3B3B3B;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        .calculator {
+            background-color: #2A2A2A;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        #display {
+            background-color: #fff;
+            color: black;
+            width: 249px;
+            height: 40px;
+            text-align: right;
+            font-size: 24px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            padding-right: 10px;
+        }
+
+        .button {
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            border-radius: 5px;
+            margin: 5px;
+            border: none;
+            color: white;
+        }
+
+        .button:hover {
+            opacity: 0.8;
+        }
+
+        .button-number {
+            background-color: #4FC3F7;
+          
+        }
+
+        .button-operator {
+            background-color: #FFB74D;
+            
+        }
+
+        .button-equal {
+            background-color: #66BB6A;
+            
+        }
+
+        .button-clear {
+            background-color: #EF5350;
+            
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1> 💀Aura Calculator💀</h1>
+    <div class="calculator">
+        <input type="text" id="display" disabled>
+        <div>
+            <button class="button button-number" onclick="appendNumber('7')">7 Aura</button>
+            <button class="button button-number" onclick="appendNumber('8')">8 Aura </button>
+            <button class="button button-number" onclick="appendNumber('9')">9 Aura</button>
+            <button class="button button-operator" onclick="setOperator('/')"> ÷ Aura</button>
+        </div>
+        <div>
+            <button class="button button-number" onclick="appendNumber('4')">4 Aura</button>
+            <button class="button button-number" onclick="appendNumber('5')">5 Aura</button>
+            <button class="button button-number" onclick="appendNumber('6')">6 Aura</button>
+            <button class="button button-operator" onclick="setOperator('*')">* Aura</button>
+        </div>
+        <div>
+            <button class="button button-number" onclick="appendNumber('1')">1 Aura</button>
+            <button class="button button-number" onclick="appendNumber('2')">2 Aura</button>
+            <button class="button button-number" onclick="appendNumber('3')">3 Aura</button>
+            <button class="button button-operator" onclick="setOperator('-')"> - Aura</button>
+        </div>
+        <div>
+            <button class="button button-number" onclick="appendNumber('0')">0 Aura</button>
+            <button class="button button-equal" onclick="calculateResult()"> Aura = </button>
+            <button class="button button-operator" onclick="setOperator('+')">+ Aura</button>
+            <button class="button button-clear" onclick="clearDisplay()">Clear Aura</button>
+        </div>
+    </div>
+
+    <script>
+        let currentInput = '';
+        let operator = '';
+        let firstOperand = null;
+
+        function appendNumber(number) {
+            currentInput += number;
+            updateDisplay();
+        }
+
+        function setOperator(op) {
+            if (currentInput === '') return;
+
+            if (firstOperand === null) {
+                firstOperand = parseFloat(currentInput);
+            } else {
+                calculateResult();
+            }
+            operator = op;
+            currentInput = '';
+        }
+
+        function calculateResult() {
+            if (firstOperand === null || currentInput === '') return;
+
+            let secondOperand = parseFloat(currentInput);
+            let result;
+
+            switch (operator) {
+                case '+':
+                    result = firstOperand + secondOperand;
+                    break;
+                case '-':
+                    result = firstOperand - secondOperand;
+                    break;
+                case '*':
+                    result = firstOperand * secondOperand;
+                    break;
+                case '/':
+                    result = firstOperand / secondOperand;
+                    break;
+                default:
+                    return;
+            }
+
+            clearAll();
+            currentInput = result.toString();
+            updateDisplay();
+        }
+
+        function clearDisplay() {
+            clearAll();
+            updateDisplay();
+        }
+
+        function clearAll() {
+            currentInput = '';
+            operator = '';
+            firstOperand = null;
+        }
+
+        function updateDisplay() {
+            document.getElementById('display').value = currentInput;
+        }
+    </script>
+</body>
+
+</html>
